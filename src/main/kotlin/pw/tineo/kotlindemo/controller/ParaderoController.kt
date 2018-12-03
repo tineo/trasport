@@ -17,4 +17,15 @@ class ParaderoController(private val paraderoRepository: ParaderoRepository) {
     @PostMapping("/paraderos")
     fun createNewParadero(@Valid @RequestBody paradero: Paradero): Paradero =
             paraderoRepository.save(paradero)
+
+    @DeleteMapping("/paraderos/{id}")
+    fun deleteArticleById(@PathVariable(value = "id") articleId: Long): ResponseEntity<Void> {
+
+        return paraderoRepository.findById(articleId).map { article  ->
+            paraderoRepository.delete(article)
+            ResponseEntity<Void>(HttpStatus.OK)
+        }.orElse(ResponseEntity.notFound().build())
+
+
+    }
 }
