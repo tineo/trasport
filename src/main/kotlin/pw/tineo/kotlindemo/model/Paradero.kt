@@ -5,12 +5,15 @@ import javax.persistence.GeneratedValue
 import javax.persistence.SequenceGenerator
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.Column
+
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 @Entity
 data class Paradero (
         @Id @GeneratedValue(strategy = GenerationType.AUTO) @SequenceGenerator(name="seq_paradero_gen", sequenceName="seq_paradero")
+        @Column(name = "paraderoid")
         val id: Long = 0,
 
         @get: NotBlank
@@ -21,5 +24,6 @@ data class Paradero (
 
         @get: NotNull
         val latitud: Double = 0.0
+
 
 )

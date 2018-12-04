@@ -11,21 +11,20 @@ import pw.tineo.kotlindemo.repository.ParaderoRepository
 @RequestMapping("/api")
 class ParaderoController(private val paraderoRepository: ParaderoRepository) {
     @GetMapping("/paraderos")
-    fun getAllParaderos(): List<Paradero> =
-            paraderoRepository.findAll()
+    fun getAllParaderos(): List<Paradero> {
+           return paraderoRepository.findAll()
+    }
 
     @PostMapping("/paraderos")
     fun createNewParadero(@Valid @RequestBody paradero: Paradero): Paradero =
             paraderoRepository.save(paradero)
 
     @DeleteMapping("/paraderos/{id}")
-    fun deleteArticleById(@PathVariable(value = "id") articleId: Long): ResponseEntity<Void> {
+    fun deleteArticleById(@PathVariable(value = "id") paraderoId: Long): ResponseEntity<Void> {
 
-        return paraderoRepository.findById(articleId).map { article  ->
-            paraderoRepository.delete(article)
+        return paraderoRepository.findById(paraderoId).map { paradero  ->
+            paraderoRepository.delete(paradero)
             ResponseEntity<Void>(HttpStatus.OK)
         }.orElse(ResponseEntity.notFound().build())
-
-
     }
 }
